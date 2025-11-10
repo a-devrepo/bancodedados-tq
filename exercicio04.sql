@@ -12,7 +12,7 @@ CREATE TABLE produtos(
 id  INT  AUTO_INCREMENT PRIMARY KEY,
 nome  VARCHAR(100)  NOT NULL,
 preco DECIMAL(10,2) NOT NULL,
-categoria  varchar(50) NOT NULL
+categoria  VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE vendas(
@@ -21,8 +21,8 @@ data_venda  DATE NOT NULL,
 quantidade INT NOT NULL,
 vendedor_id INT NOT NULL,
 produto_id INT NOT NULL,
-foreign key(vendedor_id) REFERENCES vendedores(id),
-foreign key(produto_id) REFERENCES produtos(id)
+FOREIGN KEY(vendedor_id) REFERENCES vendedores(id),
+FOREIGN KEY(produto_id) REFERENCES produtos(id)
 );
 
 INSERT INTO vendedores (nome, cidade, salario) VALUES
@@ -74,7 +74,7 @@ FROM vendas vd
 INNER JOIN produtos p ON p.id = vd.produto_id 
 GROUP BY MONTH(vd.data_venda);
 
--- Faça uma consulta quer classifique o desempenho dos vendedores
+-- Faça uma consulta que classifique o desempenho dos vendedores
 SELECT v.nome,
 SUM(p.preco * vd.quantidade) as valor_total_vendas,
 CASE
